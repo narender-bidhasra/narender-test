@@ -84,7 +84,7 @@ function App() {
                         <li>
                           <label>Date</label>
                           <TextField
-                            type="text"
+                            type="number"
                             variant="outlined"
                             defaultValue="03"
                             size="small"
