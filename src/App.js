@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { Container, Grid, Button, TextField, Box, Select, FormControl, MenuItem, Radio, RadioGroup, FormControlLabel, FormLabel } from '@material-ui/core'
+import React, { useEffect, useState } from 'react';
+import { Container, Grid, Button, TextField, Box, Select, FormControl, MenuItem, Radio, RadioGroup, FormControlLabel, Tooltip } from '@material-ui/core'
+import { validateSignin } from './validation';
 
 
 function App() {
@@ -14,15 +15,28 @@ function App() {
     setYear(event.target.value);
   };
 
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [emailError, setEmailError] = useState("");
-  // const [passwordError, setPasswordError] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState({});
       
-  // function handleUserInput(e)  {
-  //   e.preventDefault();      
-  //   setEmail(e.target.value);
-  // };
+  const checkValidation = () => {
+    const { isValid, errors } = validateSignin({email,password});
+    setErrors({ ...errors })
+    return isValid;
+  }
+
+  const handleChange = (e) => {
+    const { name = "", value = ""} = e.target
+    if(name == 'email'){
+      setEmail(value)
+    }else if (name == 'password'){
+      setPassword(value)
+    }
+  } 
+
+  const submit = () => {
+    if(checkValidation()){}
+  }
 
   return (
     <div className="cus-auth-container">
@@ -42,20 +56,26 @@ function App() {
                 <h2>Create an account</h2>
                 <Box component="form">
 
-                  <FormControl variant="standard" fullWidth className="mb-5">
-                    <label>Enter your email</label>
-                    <TextField 
-                      label=""
-                      color=""
-                      variant="outlined"
-                      fullWidth
-                      defaultValue="03"
-                      size="small"
-                      // value={email}
-                      // onChange={handleUserInput}
-                    />
-                    <p class="error">Please add valid email address</p>
-                  </FormControl>
+                  <div className="rep-listing">
+                    <FormControl variant="standard" fullWidth className={`mb-5 ${errors.email ? 'err-msg' : ''}`}>
+                      <label>Enter your email</label>
+                      <TextField 
+                        type="text"
+                        variant="outlined"
+                        fullWidth
+                        size="small"
+                        value={email}
+                        name="email"
+                        onChange={handleChange}
+                      />
+                    </FormControl>
+                    {
+                      errors.email ?
+                        <span className="error"><span>{errors.email}</span></span>
+                      :
+                      null
+                    }
+                  </div>
 
                   <FormControl variant="standard" fullWidth className="mb-5">
                     <label>Date of birth <span>(Optional)</span></label>
@@ -63,14 +83,20 @@ function App() {
                       <ul>
                         <li>
                           <label>Date</label>
-                          <TextField label="" color="" variant="outlined" defaultValue="03" size="small" fullWidth />
+                          <TextField
+                            type="text"
+                            variant="outlined"
+                            defaultValue="03"
+                            size="small"
+                            fullWidth
+                          />
                         </li>
                         <li>
                           <label>March</label>
                           <Select
                             labelId="month-select-label"
                             id="month-select"
-                            value={month}
+                            value={month || 3}
                             label="month"
                             onChange={handleMonthChange}
                             variant="outlined"
@@ -96,7 +122,7 @@ function App() {
                           <Select
                             labelId="year-select-label"
                             id="year-select"
-                            value={year}
+                            value={year || 1}
                             label="Year"
                             onChange={handleYearChange}
                             variant="outlined"
@@ -122,11 +148,25 @@ function App() {
                     </div>
                   </FormControl>
 
-                  <FormControl variant="standard" fullWidth className="mb-5">
-                    <label>Chosse a strong password</label>
-                    <TextField label="" color="" variant="outlined" size="small" value="" />
-                    <p class="error">Please add valid password</p>
-                  </FormControl>
+                  <div className="rep-listing">
+                    <FormControl variant="standard" fullWidth className={`mb-5 ${errors.password ? 'err-msg' : ''}`}>
+                      <label>Chosse a strong password</label>
+                      <TextField
+                        type="password"
+                        variant="outlined" 
+                        size="small"
+                        name="password"
+                        value={password}                     
+                        onChange={handleChange}
+                      />
+                    </FormControl>
+                    {
+                      errors.password ?
+                        <span className="error"><span>{errors.password}</span></span>
+                      :
+                      null
+                    }
+                  </div>
 
                   <FormControl variant="standard" fullWidth className="mb-2">
                     <label>Are you an agency or individual?</label>
@@ -137,7 +177,7 @@ function App() {
                   </FormControl>
 
                   <FormControl fullWidth>
-                    <Button className="cus-btn">Submit</Button>
+                    <Button className="cus-btn" onClick={submit}>Submit</Button>
                   </FormControl>
 
                 </Box>

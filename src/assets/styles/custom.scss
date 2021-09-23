@@ -39,6 +39,7 @@ button{
         width: 190px;
         background: $blue-color;
         color: $white-color;
+        text-transform: capitalize;
         &:hover, &:focus{
             background: $blue-color;
             color: $white-color;
@@ -146,6 +147,7 @@ button{
                 font-size: 16px;
                 font-weight: bold;
                 margin-bottom: 10px;
+                display: block;
                 span {
                     font-weight: 500;
                     font-size: 14px;
@@ -180,10 +182,16 @@ button{
                             font-weight: normal;
                             width: 100%;
                             display: inline-block;
+                            margin-bottom: 6px;
                         }
                         .MuiSelect-select{
                             padding-top: 10.5px;
                             padding-bottom: 10.5px;
+                        }
+                        svg{
+                            top: calc(50% - 16px);
+                            color: $black-color;
+                            font-size: 2rem;
                         }
                     }
                 }
@@ -194,6 +202,11 @@ button{
                 top: -2px;
                 legend {
                     display: none;
+                }
+            }
+            .err-msg{
+                fieldset {
+                    border-color: $error-color;
                 }
             }
             .MuiIconButton-colorSecondary {
@@ -208,5 +221,39 @@ button{
         }
     }
 }
-
 /* Create an account Page Css Ends */
+
+// Error Message
+.error {
+    border-radius: 3px;
+    font-weight: 500;
+    font-size: 12px;
+    padding: 5px 6px;
+    width: auto;
+    max-width: 140px;
+    position: absolute;
+    background: $error-color;
+    color: $white-color;
+    top: auto;
+    margin-top: 30px;
+    margin-left: 12px;
+    &::before {
+        content: "";
+        left: -2px;
+        top: 0;
+        width: 0.71em;
+        height: 0.71em;
+        margin-top: 11px;
+        color: $error-color;;
+        overflow: hidden;
+        position: absolute;
+        box-sizing: border-box;
+        transform: rotate(45deg);
+        transform-origin: 100% 0px;
+        background: $error-color;;
+    }
+    span{
+        position: relative;
+        z-index: 11;
+    }
+}

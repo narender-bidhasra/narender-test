@@ -11,6 +11,19 @@
             max-width: 100%;
         }
     }
+    .rep-listing{
+        position: relative;
+    }
+    .error {
+        max-width: 100%;
+        margin-top: 6px;
+        margin-left: 0;
+        bottom: 12px;
+        left: 0;
+        &::before {
+            content: none;
+        }
+    }
 }
 @media screen and (max-width: 1099px){
     .cus-auth-container{
