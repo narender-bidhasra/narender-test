@@ -1,15 +1,11 @@
 @media (min-width: 1280px){
-    body{
-        .MuiContainer-maxWidthLg {
-            max-width: 1120px;
-        }
+    .cus-container {
+        max-width: 1120px;
     }
 }
 @media (max-width: 1279px){
-    body{
-        .MuiContainer-maxWidthLg {
-            max-width: 100%;
-        }
+    .cus-container {
+        max-width: 100%;
     }
     .rep-listing{
         position: relative;
@@ -28,21 +24,28 @@
 @media screen and (max-width: 1099px){
     .cus-auth-container{
         .auth-inner-container{
-            .auth-left-sec {
-                padding: 50px 15%;
-            }
-            .auth-right-sec {
-                padding: 50px 15%;
+            .cus-container-row {
+                .left-sec {
+                    .auth-left-sec {
+                        padding: 50px 10%;
+                        h2 {
+                            font-size: 30px;
+                        }
+                    }
+                }
+                .right-sec {
+                    .auth-right-sec {
+                        padding: 50px 10%;
+                    }
+                }
             }
         }
     }
 }
-@media screen and (max-width: 959px){
-    body{
-        .MuiContainer-maxWidthLg {
-            padding-left: 0;
-            padding-right: 0;
-        }
+@media screen and (max-width: 767px){
+    .cus-container {
+        padding-left: 0;
+        padding-right: 0;
     }    
     .cus-auth-container{
         &::before{
@@ -55,8 +58,16 @@
             overflow: auto;
             margin: 0;
             box-shadow: none;
-            .auth-left-sec {
-                min-height: 350px;
+            .cus-container-row {
+                .left-sec, .right-sec {
+                    max-width: 100%;
+                    flex-basis: 100%;
+                }
+                .left-sec {
+                    .auth-left-sec {
+                        min-height: 350px;
+                    }
+                }
             }
         }
     }
@@ -64,12 +75,18 @@
 @media screen and (max-width: 599px){
     .cus-auth-container{
         .auth-inner-container{
-            .auth-left-sec {
-                padding: 30px;
-                min-height: 300px;
-            }
-            .auth-right-sec {
-                padding: 30px;
+            .cus-container-row {
+                .left-sec {
+                    .auth-left-sec {
+                        padding: 30px;
+                        min-height: 300px;
+                    }
+                }
+                .right-sec {
+                    .auth-right-sec {
+                        padding: 30px;
+                    }
+                }
             }
         }
     }

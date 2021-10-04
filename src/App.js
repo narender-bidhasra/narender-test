@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Grid, Button, TextField, Box, Select, FormControl, MenuItem, Radio, RadioGroup, FormControlLabel, Tooltip } from '@material-ui/core'
 import { validateSignin } from './validation';
 
 
@@ -32,43 +31,42 @@ function App() {
     }else if (name == 'password'){
       setPassword(value)
     }
-  } 
+  }
 
-  const submit = () => {
+  const submit = (e) => {
+    e.preventDefault()
     if(checkValidation()){}
   }
 
   return (
     <div className="cus-auth-container">
-      <Container maxWidth="lg">
+      <div className="cus-container">
         <div className="auth-inner-container">
-          <Grid container>
+          <div className="cus-container-row">
 
-            <Grid item lg={5} md={5} sm={12} xs={12}>
+            <div className="left-sec">
               <div className="auth-left-sec">
                 <h2>Sample heading</h2>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum distinctio incidunt quae voluptas tempore dolorem, autem officia libero soluta.</p>
               </div>
-            </Grid>
+            </div>
 
-            <Grid item lg={7} md={7} sm={12} xs={12}>
+            <div className="right-sec">
               <div className="auth-right-sec">
                 <h2>Create an account</h2>
-                <Box component="form">
+                <form onSubmit={submit}>
 
                   <div className="rep-listing">
-                    <FormControl variant="standard" fullWidth className={`mb-5 ${errors.email ? 'err-msg' : ''}`}>
+                    <div className={`mb-5 rep-sec full-width ${errors.email ? 'err-msg' : ''}`}>
                       <label>Enter your email</label>
-                      <TextField 
+                      <input 
                         type="text"
-                        variant="outlined"
-                        fullWidth
-                        size="small"
+                        className="full-width"
                         value={email}
                         name="email"
                         onChange={handleChange}
                       />
-                    </FormControl>
+                    </div>
                     {
                       errors.email ?
                         <span className="error"><span>{errors.email}</span></span>
@@ -77,89 +75,84 @@ function App() {
                     }
                   </div>
 
-                  <FormControl variant="standard" fullWidth className="mb-5">
+                  <div className="mb-5 rep-sec full-width">
                     <label>Date of birth <span>(Optional)</span></label>
                     <div className="date-of-birth">
                       <ul>
                         <li>
                           <label>Date</label>
-                          <TextField
+                          <input
                             type="number"
-                            variant="outlined"
                             defaultValue="03"
-                            size="small"
-                            fullWidth
+                            className="full-width"
                           />
                         </li>
                         <li>
                           <label>March</label>
-                          <Select
+                          <select
                             labelId="month-select-label"
                             id="month-select"
                             value={month || 3}
                             label="month"
                             onChange={handleMonthChange}
                             variant="outlined"
-                            fullWidth
-                            size="small"
+                            className="full-width"
                           >
-                            <MenuItem value={1}>January</MenuItem>
-                            <MenuItem value={2}>February</MenuItem>
-                            <MenuItem value={3}>March</MenuItem>
-                            <MenuItem value={4}>April</MenuItem>
-                            <MenuItem value={5}>May</MenuItem>
-                            <MenuItem value={6}>June</MenuItem>
-                            <MenuItem value={7}>July</MenuItem>
-                            <MenuItem value={8}>August</MenuItem>
-                            <MenuItem value={9}>September</MenuItem>
-                            <MenuItem value={10}>October</MenuItem>
-                            <MenuItem value={11}>November</MenuItem>
-                            <MenuItem value={12}>December</MenuItem>
-                          </Select>
+                            <option value={1}>January</option>
+                            <option value={2}>February</option>
+                            <option value={3}>March</option>
+                            <option value={4}>April</option>
+                            <option value={5}>May</option>
+                            <option value={6}>June</option>
+                            <option value={7}>July</option>
+                            <option value={8}>August</option>
+                            <option value={9}>September</option>
+                            <option value={10}>October</option>
+                            <option value={11}>November</option>
+                            <option value={12}>December</option>
+                          </select>
                         </li>
                         <li>
                           <label>Year</label>
-                          <Select
+                          <select
                             labelId="year-select-label"
                             id="year-select"
                             value={year || 1}
                             label="Year"
                             onChange={handleYearChange}
                             variant="outlined"
-                            fullWidth
-                            size="small"
+                            className="full-width"
                           >
-                            <MenuItem value={1}>1995</MenuItem>
-                            <MenuItem value={2}>1996</MenuItem>
-                            <MenuItem value={3}>1997</MenuItem>
-                            <MenuItem value={4}>1998</MenuItem>
-                            <MenuItem value={5}>1999</MenuItem>
-                            <MenuItem value={6}>2000</MenuItem>
-                            <MenuItem value={7}>2001</MenuItem>
-                            <MenuItem value={8}>2002</MenuItem>
-                            <MenuItem value={9}>2003</MenuItem>
-                            <MenuItem value={10}>2004</MenuItem>
-                            <MenuItem value={11}>2004</MenuItem>
-                            <MenuItem value={12}>2004</MenuItem>
-                          </Select>
+                            <option value={1}>1995</option>
+                            <option value={2}>1996</option>
+                            <option value={3}>1997</option>
+                            <option value={4}>1998</option>
+                            <option value={5}>1999</option>
+                            <option value={6}>2000</option>
+                            <option value={7}>2001</option>
+                            <option value={8}>2002</option>
+                            <option value={9}>2003</option>
+                            <option value={10}>2004</option>
+                            <option value={11}>2004</option>
+                            <option value={12}>2004</option>
+                          </select>
                         </li>
                       </ul>                   
                       
                     </div>
-                  </FormControl>
+                  </div>
 
                   <div className="rep-listing">
-                    <FormControl variant="standard" fullWidth className={`mb-5 ${errors.password ? 'err-msg' : ''}`}>
+                    <div className={`mb-5 rep-sec full-width ${errors.password ? 'err-msg' : ''}`}>
                       <label>Chosse a strong password</label>
-                      <TextField
+                      <input
                         type="password"
-                        variant="outlined" 
-                        size="small"
                         name="password"
                         value={password}                     
                         onChange={handleChange}
+                        className="full-width"
                       />
-                    </FormControl>
+                    </div>
                     {
                       errors.password ?
                         <span className="error"><span>{errors.password}</span></span>
@@ -168,25 +161,31 @@ function App() {
                     }
                   </div>
 
-                  <FormControl variant="standard" fullWidth className="mb-2">
+                  <div className="mb-2 rep-sec full-width cus-radio-sec">
                     <label>Are you an agency or individual?</label>
-                    <RadioGroup row aria-label="individual-agency" name="radio-buttons-group" className="cus-radio-group" defaultValue="individual">
-                      <FormControlLabel value="individual" control={<Radio />} label="Individual" />
-                      <FormControlLabel value="agency" control={<Radio />} label="Agency" />
-                    </RadioGroup>
-                  </FormControl>
+                    <ul>
+                      <li>
+                        <input type="radio" id="individual" name="cus-radio-field" value="individual" checked />
+                        <label for="individual">Individual</label>
+                      </li>
+                      <li>
+                         <input type="radio" id="agency" name="cus-radio-field" value="agency" />
+                         <label for="agency">Agency</label>
+                      </li>
+                    </ul>
+                  </div>
 
-                  <FormControl fullWidth>
-                    <Button className="cus-btn" onClick={submit}>Submit</Button>
-                  </FormControl>
+                  <div className="full-width">
+                    <button type="submit" className="cus-btn" onClick={submit}>Submit</button>
+                  </div>
 
-                </Box>
+                </form>
               </div>
 
-            </Grid>
-          </Grid>
+            </div>
+          </div>
         </div>
-      </Container>
+      </div>
     </div>
   );
 }
